@@ -34,7 +34,7 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Docker Login') {
+        stage('Docker login') {
             steps {
                 sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
             }
