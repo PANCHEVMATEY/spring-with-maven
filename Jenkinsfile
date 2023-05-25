@@ -3,7 +3,7 @@ pipeline {
         label 'build-in-slave'
     }
     tools {
-        nodejs 'maven'
+        maven 'maven'
         dockerTool 'Docker'
     }
     triggers {
