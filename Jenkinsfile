@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Clean') {
             steps {
-                cleanWs() //clean workspace
+                cleanWs()
         }
     }
         stage('Clone Repo') {
@@ -32,8 +32,6 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvn test'
-                // Runs 'npm test' to execute tests
-                // This step is for testing the Node.js modules
             }
         }
         stage('Docker Login') {
@@ -53,9 +51,8 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                sh 'docker container rm -f spring-with-maven || true'
-                sh 'docker container run -d --name spring-with-maven mateyp/spring-with-maven'
+           steps {
+                sh 'docker run -d -p port:8080 ${IMAGE_NAME}:${BUILD_NUMBER}'
             }
         }
     }
